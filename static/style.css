@@ -1,0 +1,63 @@
+/* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+    transition: box-shadow 0.3s ease; /* Добавляем анимацию для тени */
+}
+
+.container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Увеличиваем тень при наведении */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    width: 45%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease; /* Добавляем анимацию для границы */
+}
+
+input[type="text"]:focus {
+    border-color: #007bff; /* Изменяем цвет границы при фокусировке */
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Добавляем анимацию для фона кнопки */
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}

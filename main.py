@@ -3,7 +3,6 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-import subprocess
 import asyncio
 
 app = FastAPI()
@@ -14,11 +13,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # Подключаем папку с шаблонами Jinja2
 templates = Jinja2Templates(directory="templates")
 
-
+#Функция запуска внешнего скрипта
 async def run_external_script(script_path):
-    """
-    Функция для запуска внешнего скрипта
-    """
     process = await asyncio.create_subprocess_exec(
         "python", script_path,
         stdout=asyncio.subprocess.PIPE,
@@ -27,19 +23,19 @@ async def run_external_script(script_path):
     stdout, stderr = await process.communicate()
     return stdout.decode(), stderr.decode()
 
-
+#Страница формы ввода
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    """
-    Главная страница с формой для ввода
-    """
     return templates.TemplateResponse("index.html", {"request": request})
 
-
+#Обработчик после отправки формы
 @app.post("/run_script/")
-async def run_script(request: Request, script_path: str = Form(...)):
-    """
-    Обработчик для запуска скрипта после отправки формы
-    """
-    stdout, stderr = await run_external_script(script_path)
-    return {"stdout": stdout, "stderr": stderr}
+async def run_script(search_query: str = Form(...), search_location: str = Form(...)):
+    # Получаем значения из HTML-инпутов
+    query = search_query
+    location = search_location
+    
+    # Здесь можно выполнить дополнительные операции с полученными данными, например, передать их в функцию run_external_script
+    
+    return {"query": query, "location": location}
+

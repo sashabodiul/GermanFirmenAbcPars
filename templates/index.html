@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Run External Script</title>
+    <title>firmenabc.at Searcher</title>
     <link href="/static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1>Run External Script</h1>
-    <form action="/run_script/" method="post">
-        <label for="script_path">Enter Script Path:</label><br>
-        <input type="text" id="script_path" name="script_path"><br>
-        <input type="submit" value="Run Script">
-    </form>
+    <div class="container">
+        <h1>firmenabc.at Searcher</h1>
+        <form action="/run_script/" method="post">
+            <label for="search_query">What search:</label><br>
+            <input type="text" id="search_query" name="search_query"><br>
+            <label for="search_location">Where search:</label><br>
+            <input type="text" id="search_location" name="search_location"><br>
+            <input type="submit" value="Search">
+        </form>
+    </div>
 </body>
 </html>
