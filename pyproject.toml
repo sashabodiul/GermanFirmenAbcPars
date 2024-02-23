@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "germanfirmenabcpars"
+version = "0.1.0"
+description = "Parser with Web-Interface"
+authors = ["sashabodiul <sashabodiul07@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = "^0.27.1"
+aiofiles = "^23.2.1"
+beautifulsoup4 = "^4.12.3"
+
+[tool.poetry.group.dev.dependencies]
+aiofiles = "^23.2.1"
+beautifulsoup4 = "^4.12.3"
+fastapi = "^0.109.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
