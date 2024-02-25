@@ -74,11 +74,8 @@ async def get_urls(what: str, where: str = None):
             clear_url = re.sub(r'\d+', '', str(last_href))
             result = []
             for i in range(1, number+1):
-                print('pg'+str(i))
                 data = await extract_data(clear_url + str(i))  # Исправлено здесь
                 result.append(data)
-        else:
-            print("Число не найдено в строке.")
     else:
         result = await extract_data(url)
 

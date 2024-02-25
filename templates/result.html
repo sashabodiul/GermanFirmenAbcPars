@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+    <p>Here are the results:</p>
+    <ul>
+        {% for key, value in data.items() %}
+            <li>
+                <strong>{{ key }}</strong>:
+                <ul>
+                    {% for k, v in value.items() %}
+                        <li><strong>{{ k }}</strong>: {{ v }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    <p>Download the results:</p>
+    <ul>
+        <li><a href="/static/data.json" download>Download JSON</a></li>
+        <li><a href="/static/data.xlsx" download>Download Excel</a></li>
+    </ul>
+</body>
+</html>
