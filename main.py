@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import asyncio
+from req_script import get_urls, extract_data
 
 app = FastAPI()
 
@@ -32,10 +33,9 @@ async def home(request: Request):
 @app.post("/run_script/")
 async def run_script(search_query: str = Form(...), search_location: str = Form(...)):
     # Получаем значения из HTML-инпутов
-    query = search_query
-    location = search_location
+    where = search_query
+    what = search_location
     
     # Здесь можно выполнить дополнительные операции с полученными данными, например, передать их в функцию run_external_script
     
-    return {"query": query, "location": location}
-
+    return await get_urls(what, where) if where is not None else await get_urls(what)
