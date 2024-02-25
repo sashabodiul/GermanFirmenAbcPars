@@ -3,6 +3,7 @@ import asyncio
 from bs4 import BeautifulSoup
 import re
 
+#TODO: clear data
 async def extract_data(url:str):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
@@ -29,7 +30,6 @@ async def extract_data(url:str):
             "portrait":links[0],
             "contact":links[1],
         }
-'uvicorn main:app --reload'
 
 async def get_urls(what:str,where:str=None):
     if where is not None:
