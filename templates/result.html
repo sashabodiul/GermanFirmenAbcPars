@@ -2,29 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results</title>
+    <title>Company Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        td {
+            background-color: #fff;
+            color: #555;
+        }
+        img {
+            max-width: 100px;
+            max-height: 100px;
+            display: block;
+            margin: 0 auto;
+        }
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056aa;
+        }
+    </style>
 </head>
 <body>
-    <h1>Results</h1>
-    <p>Here are the results:</p>
-    <ul>
-        {% for key, value in data.items() %}
-            <li>
-                <strong>{{ key }}</strong>:
-                <ul>
-                    {% for k, v in value.items() %}
-                        <li><strong>{{ k }}</strong>: {{ v }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
+    <h1>Company Information</h1>
+
+    <!-- Добавление кнопок для скачивания JSON и Excel файлов -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <form action="/download_json" method="get" style="display: inline;">
+            <input type="hidden" name="json_data" value="{{ json_data }}">
+            <button type="submit">Download JSON</button>
+        </form>
+        <form action="/download_excel" method="get" style="display: inline;">
+            <button type="submit">Download Excel</button>
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Company Info</th>
+            <th>Video</th>
+            <th>Rating</th>
+            <th>Contact</th>
+        </tr>
+        {% for block in data %}
+            {% for _, company in block.items() %}
+                <tr>
+                    <td><img src="{{ company.img }}" alt="Company Image"></td>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.address.street }}, {{ company.address.postalCode }}, {{ company.address.addressLocality }}</td>
+                    <td><a href="{{ company.company_info }}">Company Info</a></td>
+                    <td><a href="{{ company.video }}">Video</a></td>
+                    <td>{{ company.rating }}</td>
+                    <td><a href="{{ company.contact }}">Contact</a></td>
+                </tr>
+            {% endfor %}
         {% endfor %}
-    </ul>
-    <p>Download the results:</p>
-    <ul>
-        <li><a href="/static/data.json" download>Download JSON</a></li>
-        <li><a href="/static/data.xlsx" download>Download Excel</a></li>
-    </ul>
+    </table>
 </body>
 </html>
