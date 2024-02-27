@@ -5,7 +5,7 @@ FROM python:3.10.11
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Install pyenv
+# Install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
@@ -22,30 +22,20 @@ RUN apt-get update && \
         xz-utils \
         tk-dev \
         libffi-dev \
-        liblzma-dev \
-        python-openssl && \
+        liblzma-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN curl https://pyenv.run | bash
-
-ENV PATH="/root/.pyenv/bin:${PATH}"
-
-# Install Python 3.10.11 using pyenv
-RUN pyenv install 3.10.11 && \
-    pyenv global 3.10.11
-
-# Install Poetry
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-ENV PATH="/root/.poetry/bin:${PATH}"
+# Install Python 3.10.11 using virtualenv
+RUN python3 -m venv .venv
 
 # Set the working directory in the container
 WORKDIR /code
 
-# Copy the poetry files
-COPY pyproject.toml poetry.lock /code/
+# Copy the requirements file
+COPY requirements.txt /code/
 
-# Install dependencies
-RUN poetry install
+# Install project dependencies
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 # Copy the project code
 COPY . /code/
