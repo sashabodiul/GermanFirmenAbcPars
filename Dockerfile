@@ -41,4 +41,4 @@ RUN python3 -m pip install --no-cache-dir -r requirements.txt
 COPY . /code/
 
 # Command to run the application
-CMD ["uvicorn", "main:app", "--reload"]
+CMD ["uvicorn", "main:app", "--host 0.0.0.0", "--port 8000", "--reload"]
