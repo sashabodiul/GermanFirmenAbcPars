@@ -7,7 +7,7 @@ import pandas as pd
 from tempfile import NamedTemporaryFile
 from req_script import get_urls
 
-app = FastAPI()
+app = FastAPI(host="0.0.0.0")
 
 # Подключаем папку со статическими файлами (CSS, JS и т.д.)
 app.mount("/static", StaticFiles(directory="static"), name="static")
