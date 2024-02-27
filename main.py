@@ -31,12 +31,12 @@ async def save_excel(data):
     result.to_excel('output.xlsx', index=False)
 
 # Страница формы ввода
-@app.get("/", response_class=HTMLResponse, host="0.0.0.0")
+@app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 # Обработчик после отправки формы
-@app.post("/run_script/", host="0.0.0.0")
+@app.post("/run_script/")
 async def run_script(request: Request, search_query: str = Form(...), search_location: str = Form(...)):
     # Получаем значения из HTML-инпутов
     where = search_query
@@ -60,7 +60,7 @@ async def run_script(request: Request, search_query: str = Form(...), search_loc
     )
 
 # Обработчик для скачивания JSON файла
-@app.get("/download_json/", host="0.0.0.0")
+@app.get("/download_json/")
 async def download_json(json_data: str = Query(...)):
     temp_file = NamedTemporaryFile(delete=False, suffix=".json")
     temp_file.write(json_data.encode())
@@ -68,6 +68,6 @@ async def download_json(json_data: str = Query(...)):
     return FileResponse(temp_file.name, media_type="application/json", filename="data.json")
 
 # Обработчик для скачивания Excel файла
-@app.get("/download_excel/", host="0.0.0.0")
+@app.get("/download_excel/")
 async def download_excel():
     return FileResponse("output.xlsx", media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename="output.xlsx")
