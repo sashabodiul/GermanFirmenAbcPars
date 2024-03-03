@@ -44,7 +44,8 @@ async def run_script(request: Request, search_query: str = Form(...), search_loc
     
     # Получаем данные
     result = await get_urls(what, where) if where is not None else await get_urls(what)
-
+    if not result:
+        return templates.TemplateResponse('empty.html', {"request": request})
     # Сохраняем данные в JSON и Excel
     json_data = await save_json(result)
     await save_excel(result)
