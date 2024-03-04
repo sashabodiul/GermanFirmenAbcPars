@@ -74,29 +74,32 @@
             <button type="submit">Download Excel</button>
         </form>
     </div>
-
-    <table>
+    <table id="companyTable">
         <tr>
-            <th>Image</th>
+            <th>Logo</th>
             <th>Name</th>
-            <th>Address</th>
+            <th>Street</th>
+            <th>Postal Code</th>
+            <th>Locality</th>
             <th>Company Info</th>
             <th>Video</th>
             <th>Rating</th>
+            <th>Portrait</th>
             <th>Contact</th>
         </tr>
-        {% for block in data %}
-            {% for _, company in block.items() %}
-                <tr>
-                    <td><img src="{{ company.img }}" alt="Company Image"></td>
-                    <td>{{ company.name }}</td>
-                    <td>{{ company.address.street }}, {{ company.address.postalCode }}, {{ company.address.addressLocality }}</td>
-                    <td><a href="{{ company.company_info }}">Company Info</a></td>
-                    <td><a href="{{ company.video }}">Video</a></td>
-                    <td>{{ company.rating }}</td>
-                    <td><a href="{{ company.contact }}">Contact</a></td>
-                </tr>
-            {% endfor %}
+        {% for item in data %}
+        <tr>
+            <td><img src="{{ item['img'] }}"></td>
+            <td>{{ item['name'] }}</td>
+            <td>{{ item['address']['street'] }}</td>
+            <td>{{ item['address']['postalCode'] }}</td>
+            <td>{{ item['address']['addressLocality'] }}</td>
+            <td><a href="{{ item['company_info'] }}">Link</a></td>
+            <td><a href="{{ item['video'] }}">Link</a></td>
+            <td>{{ item['rating'] }}</td>
+            <td><a href="{{ item['portrait'] }}">Link</a></td>
+            <td><a href="{{ item['contact'] }}">Link</a></td>
+        </tr>
         {% endfor %}
     </table>
 </body>
